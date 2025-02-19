@@ -1,5 +1,4 @@
 <?php
-//FICHIER D'EXECUTION, DONC IMPORT DE TOUTES LES RESSOURCES
 session_start();
 
 include './env.php';
@@ -11,9 +10,44 @@ include './abstract/abstractModel.php';
 include './view/viewHeader.php';
 include './view/viewAccount.php';
 include './view/viewFooter.php';
+include './view/viewMyAccount.php';
+include './view/viewDeco.php';
+
 include './utils/mySQLBDD.php';
 include './model/accountModel.php';
 include './controller/accountController.php';
 
-$home = new AccountController(['accountModel'=>new AccountModel(new MySQLBDD())],['header'=>new ViewHeader(),'footer'=> new ViewFooter(), 'accueil' => new ViewAccount()]);
-$home->render();
+$url = parse_url($_SERVER['REQUEST_URI']);
+$path = isset($url['path']) ? $url['path'] : '/';
+
+$listModels = ['accountModel' => new AccountModel(new MySQLBDD())];
+$listViews = [
+    'header' => new ViewHeader(), 
+    'footer' => new ViewFooter(), 
+    'accueil' => new ViewAccount(), 
+    'my-account' => new ViewMyAccount(),
+    'deconnexion' => new ViewDeco(),
+];
+
+switch ($path) {
+    case '/' :
+        $home = new AccountController($listModels, $listViews); 
+        $home->render();
+        break;
+    
+    case '/moncompte' :
+        include "./controller/myAccountController.php";
+        $myAccount = new MyAccountController($listModels, $listViews); 
+        $myAccount->render();
+        break;
+    
+    case '/deconnexion' :
+        include "./controller/decoController.php";
+        $deconnexion = new DecoController($listModels, $listViews); 
+        $deconnexion->render();
+        break;
+    
+    default :
+        echo "???";
+        break;
+}

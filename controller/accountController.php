@@ -39,9 +39,9 @@ class AccountController extends AbstractController {
             $_SESSION['email']= $data['email'];
     
             header('location:/');
-            exit;
-    
             return $_SESSION['firstname']. " ".$_SESSION['lastname']." est connecté !";
+
+    
         }
         return '';
     }

@@ -10,7 +10,7 @@ class ViewHeader implements interfaceView{
     //METHOD
     public function displayView():string{
         ob_start();
-?>
+    ?>
         <html lang="fr">
         <head>
             <meta charset="UTF-8">
@@ -25,7 +25,7 @@ class ViewHeader implements interfaceView{
                 </nav>
                 
             </header>
-<?php
+    <?php
         return ob_get_clean();
     }
 }
