@@ -7,11 +7,13 @@ include './interface/interfaceView.php';
 include './interface/interfaceBDD.php';
 include './abstract/abstractController.php';
 include './abstract/abstractModel.php';
+
 include './view/viewHeader.php';
 include './view/viewAccount.php';
 include './view/viewFooter.php';
 include './view/viewMyAccount.php';
 include './view/viewDeco.php';
+include './view/viewError.php';
 
 include './utils/mySQLBDD.php';
 include './model/accountModel.php';
