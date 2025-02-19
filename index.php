@@ -14,6 +14,8 @@ include './view/viewFooter.php';
 include './view/viewMyAccount.php';
 include './view/viewDeco.php';
 include './view/viewError.php';
+include './view/viewCategory.php';
+
 
 include './utils/mySQLBDD.php';
 include './model/accountModel.php';
@@ -29,7 +31,8 @@ $listViews = [
     'accueil' => new ViewAccount(), 
     'my-account' => new ViewMyAccount(),
     'disconnect' => new ViewDeco(),
-    'error' => new ViewError(),
+    'category' => new ViewCategory(),
+
 ];
 
 switch ($path) {
@@ -48,6 +51,12 @@ switch ($path) {
         include "./controller/decoController.php";
         $deconnexion = new DecoController($listModels, $listViews); 
         $deconnexion->render();
+        break;
+
+        case '/category' :
+        include "./controller/categoryController.php";
+        $category = new CategoryController($listModels, $listViews); 
+        $category->render();
         break;
     
     default :

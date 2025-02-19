@@ -32,6 +32,7 @@ abstract class AbstractController {
         if(isset($_SESSION['id'])){
             $this->getListViews()['header']->setNav(
                 '<a href="/moncompte">Mon Compte</a>
+                <a href="/category">Categories</a>
                  <a href="/deconnexion">Se Déconnecter</a>
                  ');
          }
