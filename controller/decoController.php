@@ -11,7 +11,7 @@ class DecoController extends AbstractController {
         $this->deconnexion();
 
         $this->renderHeader();
-        echo $this->getListViews()['deconnexion']->displayView();
+        echo $this->getListViews()['disconnect']->displayView();
         $this->renderFooter();
     }
 }

@@ -28,7 +28,8 @@ $listViews = [
     'footer' => new ViewFooter(), 
     'accueil' => new ViewAccount(), 
     'my-account' => new ViewMyAccount(),
-    'deconnexion' => new ViewDeco(),
+    'disconnect' => new ViewDeco(),
+    'error' => new ViewError(),
 ];
 
 switch ($path) {
