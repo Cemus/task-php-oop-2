@@ -9,29 +9,32 @@ include './interface/interfaceBDD.php';
 include './abstract/abstractController.php';
 include './abstract/abstractModel.php';
 
-include './model/accountModel.php';
-include './model/categoryModel.php';
-
 
 include './view/viewHeader.php';
 include './view/viewAccount.php';
 include './view/viewFooter.php';
 include './view/viewMyAccount.php';
 include './view/viewDeco.php';
-include './view/viewError.php';
 include './view/viewCategory.php';
 
 
 include './utils/mySQLBDD.php';
 include './controller/accountController.php';
 
+
 $url = parse_url($_SERVER['REQUEST_URI']);
 $path = isset($url['path']) ? $url['path'] : '/';
 
+
+
+include './model/accountModel.php';
+include './model/categoryModel.php';
 $listModels = [
     'accountModel' => new AccountModel(new MySQLBDD()),
     'categoryModel' => new CategoryModel(new MySQLBDD()),
 ];
+
+include './view/viewError.php';
 $listViews = [
     'header' => new ViewHeader(), 
     'footer' => new ViewFooter(), 
@@ -39,7 +42,7 @@ $listViews = [
     'my-account' => new ViewMyAccount(),
     'disconnect' => new ViewDeco(),
     'category' => new ViewCategory(),
-
+    'error' => new ViewError(),
 ];
 
 switch ($path) {
@@ -67,6 +70,8 @@ switch ($path) {
         break;
     
     default :
-        echo "???";
+        include './controller/errorController.php';
+        $error = new ErrorController($listModels, $listViews); 
+        $error->render();
         break;
 }

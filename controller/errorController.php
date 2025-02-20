@@ -5,7 +5,7 @@ class ErrorController extends AbstractController {
 
     public function render():void{
         $this->renderHeader();
-        echo $this->viewError->displayView();
+        echo $this->getListViews()['error']->displayView();
         $this->renderFooter();
     }
 
