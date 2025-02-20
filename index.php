@@ -5,8 +5,13 @@ include './env.php';
 include './utils/utils.php';
 include './interface/interfaceView.php';
 include './interface/interfaceBDD.php';
+
 include './abstract/abstractController.php';
 include './abstract/abstractModel.php';
+
+include './model/accountModel.php';
+include './model/categoryModel.php';
+
 
 include './view/viewHeader.php';
 include './view/viewAccount.php';
@@ -18,13 +23,15 @@ include './view/viewCategory.php';
 
 
 include './utils/mySQLBDD.php';
-include './model/accountModel.php';
 include './controller/accountController.php';
 
 $url = parse_url($_SERVER['REQUEST_URI']);
 $path = isset($url['path']) ? $url['path'] : '/';
 
-$listModels = ['accountModel' => new AccountModel(new MySQLBDD())];
+$listModels = [
+    'accountModel' => new AccountModel(new MySQLBDD()),
+    'categoryModel' => new CategoryModel(new MySQLBDD()),
+];
 $listViews = [
     'header' => new ViewHeader(), 
     'footer' => new ViewFooter(), 
